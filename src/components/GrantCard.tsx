@@ -53,18 +53,26 @@ const GrantCard = ({ grant }) => {
 			<div className="mb-4">
 				<span className="text-sm text-gray-600">Area of Funding</span>
 				<div className="flex flex-wrap gap-2 mt-1">
-					{grant.areasOfFunding.map((area: string, index: number) => (
-						<span
-							key={index}
-							className="bg-gray-200 text-gray-700 px-2 py-1 rounded text-sm"
-						>
-							{area}
+					{grant.areasOfFunding.map(
+						(area: string, index: number, areas: Array<string>) =>
+							index < 5 && (
+								<span
+									key={index}
+									className="bg-gray-200 text-gray-700 px-2 py-1 rounded text-sm"
+								>
+									{area}
+								</span>
+							)
+					)}
+					{
+						<span className="bg-gray-200 text-gray-700 px-2 py-1 rounded text-sm">
+							+{grant.areasOfFunding.length - 5}
 						</span>
-					))}
+					}
 				</div>
 			</div>
 
-			<div className="absolute bottom-0 left-0 right-0 p-4 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+			<div className="absolute bottom-0 left-0 right-0 p-4 rounded-xl bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 				<button className="w-full bg-orange-400 text-white py-2 rounded-lg hover:bg-orange-500 transition duration-300">
 					Apply here
 				</button>
