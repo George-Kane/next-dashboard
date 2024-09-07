@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, ThumbsUp, ThumbsDown, Github, Coins } from 'lucide-react';
+import Link from 'next/link';
 
 const GrantCard = ({ grant }) => {
 	return (
@@ -9,8 +10,12 @@ const GrantCard = ({ grant }) => {
 					<Github className="w-10 h-10 text-black mr-2" />
 				</div>
 				<div className="flex space-x-2">
-					<ThumbsUp className="w-5 h-5 text-gray-400 hover:text-orange-400" />
-					<ThumbsDown className="w-5 h-5 text-gray-400 hover:text-orange-400" />
+					<Link href={`?feedback=like&grantID=${grant.id}`}>
+						<ThumbsUp className="w-5 h-5 text-gray-400 hover:text-orange-400" />
+					</Link>
+					<Link href={`?feedback=dislike&grantID=${grant.id}`}>
+						<ThumbsDown className="w-5 h-5 text-gray-400 hover:text-orange-400" />
+					</Link>
 				</div>
 			</div>
 			<span className="text-gray-600 font-medium">

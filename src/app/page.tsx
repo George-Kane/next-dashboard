@@ -1,9 +1,11 @@
 import { gql } from '@apollo/client';
-import client from '@/lib/apolloClient';
+import { initializeApollo } from '@/lib/apolloClient';
 import GrantCard from '@/components/GrantCard';
-import GrantOpportunitiesTable from '@/components/table';
+import GrantOpportunitiesTable from '@/components/GrantOpportunitiesTable';
+import FeedbackPopup from '@/components/FeedbackPopup';
 
 export default async function Home() {
+	const client = initializeApollo();
 	const {
 		data: { grants },
 	} = await client.query({
@@ -39,6 +41,7 @@ export default async function Home() {
 				All Grant Opportunities
 			</h2>
 			<GrantOpportunitiesTable />
+			<FeedbackPopup />
 		</main>
 	);
 }
