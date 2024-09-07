@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 import client from '@/lib/apolloClient';
 import GrantCard from '@/components/GrantCard';
+import GrantOpportunitiesTable from '@/components/table';
 
 export default async function Home() {
 	const {
@@ -34,6 +35,10 @@ export default async function Home() {
 					) : null
 				)}
 			</div>
+			<h2 className="text-xl text-gray-800 mb-4 mt-16">
+				All Grant Opportunities
+			</h2>
+			<GrantOpportunitiesTable />
 		</main>
 	);
 }

@@ -17,7 +17,7 @@
 }
 
 body {
-	color: rgb(var(--foreground-rgb));
+	color: rgb(229 231 235 / var(--tw-border-opacity));
 	background: linear-gradient(
 			to bottom,
 			transparent,
@@ -30,4 +30,16 @@ body {
 	.text-balance {
 		text-wrap: balance;
 	}
+}
+
+td,
+th {
+	border: 1px solid #ccc;
+}
+
+table {
+	border-collapse: collapse;
+	border-radius: 30px;
+	border-style: hidden;
+	box-shadow: 0 0 0 1px rgb(229 231 235 / var(--tw-border-opacity));
 }
