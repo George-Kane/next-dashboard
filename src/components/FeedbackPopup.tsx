@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useMutation } from '@apollo/client';
 import { X } from 'lucide-react';
 
-import { SUBMIT_FEEDBACK } from '@/graphql/mutations';
+import { GET_GRANTS_AND_FEEDBACKS, SUBMIT_FEEDBACK } from '@/graphql/mutations';
 
 const FeedbackPopup = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -13,8 +13,12 @@ const FeedbackPopup = () => {
 	const [grantID, setGrantID] = useState(0);
 	const [likeOrNot, setLikeOrNot] = useState('');
 	const searchParams = useSearchParams();
-	const [submitFeedback, { data, loading, error }] =
-		useMutation(SUBMIT_FEEDBACK);
+	const [submitFeedback, { data, loading, error }] = useMutation(
+		SUBMIT_FEEDBACK,
+		{
+			refetchQueries: [{ query: GET_GRANTS_AND_FEEDBACKS }],
+		}
+	);
 
 	useEffect(() => {
 		if (
@@ -29,19 +33,22 @@ const FeedbackPopup = () => {
 
 	const handleClose = () => {
 		setIsOpen(false);
-		// Remove the 'feedback' parameter from the URL
+
 		const url = new URL(window.location.href);
 		url.searchParams.delete('feedback');
+		url.searchParams.delete('grantID');
 		window.history.replaceState({}, '', url);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		submitFeedback({
-			createFeedbackInput: {
-				feedback,
-				like_grant_id: likeOrNot === 'like' ? grantID : null,
-				dislike_grant_id: likeOrNot === 'dislike' ? grantID : null,
+			variables: {
+				createFeedbackInput: {
+					feedback,
+					like_grant_id: likeOrNot === 'like' ? grantID : null,
+					dislike_grant_id: likeOrNot === 'dislike' ? grantID : null,
+				},
 			},
 		});
 		setFeedback('');

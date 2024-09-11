@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import MenuBar from '@/components/Menu';
-import { ApolloWrapper } from './ApolloWrapper';
+import { ApolloWrapper } from '@/lib/ApolloWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
