@@ -55,6 +55,12 @@ const FeedbackPopup = () => {
 		handleClose();
 	};
 
+	const handleKeyDown = (event) => {
+		if (event.key === 'Enter') {
+			handleSubmit(event);
+		}
+	};
+
 	if (!isOpen) return null;
 
 	return (
@@ -77,6 +83,7 @@ const FeedbackPopup = () => {
 					<textarea
 						value={feedback}
 						onChange={(e) => setFeedback(e.target.value)}
+						onKeyDown={handleKeyDown}
 						className="w-full p-2 border border-gray-300 rounded mb-4"
 						rows={4}
 						placeholder="Enter your feedback here..."
